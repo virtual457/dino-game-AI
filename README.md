@@ -9,9 +9,9 @@
 
 <!-- PROJECT TITLE -->
 <div align="center">
-  <h3 align="center">🤖 Dino Game Deep Reinforcement Learning - MOST IMPRESSIVE PROJECT ⭐</h3>
+  <h3 align="center">Dino Game Deep Reinforcement Learning</h3>
   <p align="center">
-    <strong>🚀 PORTFOLIO SHOWCASE:</strong> An autonomous AI agent that learns to play Chrome's Dino game using Double Deep Q-Network (DDQN) with ResNet architecture. Features automated training loops, balanced experience replay, and real-time game interaction.
+    <strong>Portfolio:</strong> An autonomous AI agent that learns to play Chrome's Dino game using Double Deep Q-Network (DDQN) with ResNet architecture. Features automated training loops, balanced experience replay, and real-time game interaction.
     <br/>
     <em>Last Updated: 2025-01-19 | Advanced AI/ML Project</em>
     <br/>
