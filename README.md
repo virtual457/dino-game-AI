@@ -9,11 +9,9 @@
 
 <!-- PROJECT TITLE -->
 <div align="center">
-  <h3 align="center">Dino Game Deep Reinforcement Learning</h3>
+  <h3 align="center">🎮 Dino Game Deep Reinforcement Learning</h3>
   <p align="center">
-    <strong>Portfolio:</strong> An autonomous AI agent that learns to play Chrome's Dino game using Double Deep Q-Network (DDQN) with ResNet architecture. Features automated training loops, balanced experience replay, and real-time game interaction.
-    <br/>
-    <em>Last Updated: 2025-01-19 | Advanced AI/ML Project</em>
+    An autonomous AI agent that learns to play Chrome's Dino game using Double Deep Q-Network (DDQN) with ResNet architecture. Features automated training loops, balanced experience replay, and real-time game interaction.
     <br/>
     <a href="https://github.com/virtual457/dino-game"><strong>Explore the docs »</strong></a>
     <br/><br/>
@@ -23,6 +21,12 @@
     ·
     <a href="https://github.com/virtual457/dino-game/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
+</div>
+
+<!-- DEMO GIF -->
+<div align="center">
+  <img src="demo.gif" alt="AI Playing Dino Game" width="800"/>
+  <p><em>Trained AI agent playing Chrome Dino game autonomously</em></p>
 </div>
 
 ## About The Project
@@ -50,6 +54,7 @@ This project serves as a portfolio piece demonstrating expertise in deep reinfor
 - ✅ Action persistence (no flickering)
 - ✅ Hot-reloadable hyperparameters
 - ✅ Comprehensive training visualization
+- ✅ Demo GIF generation from best gameplay
 
 ## Architecture
 
@@ -97,7 +102,7 @@ cd dino-game
 
 # Install dependencies
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-pip install numpy opencv-python mss pyautogui pygetwindow matplotlib
+pip install numpy opencv-python mss pyautogui pygetwindow matplotlib pillow
 
 # Configure display settings in config.py
 # Update CAPTURE_LEFT, CAPTURE_TOP for your monitor layout
@@ -110,7 +115,10 @@ python automated_training_loop.py
 
 # Or manually control training phases
 python online_collector.py --num-episodes 40 --epsilon 0.2
-python offline_trainer.py --max-steps 5000 --target-mse 9.0
+python offline_trainer.py --max-steps 2000 --target-mse 9.0
+
+# Create demo GIF from trained model
+python create_demo_gif.py --episodes 10 --output demo.gif --fps 10
 ```
 
 ### Configuration
@@ -122,15 +130,39 @@ LEARNING_RATE = 1e-4           # Adam optimizer learning rate
 EPSILON_DECAY_RATE = 0.993     # Exploration decay rate
 ```
 
+## Creating Demo GIF
+
+The project includes a script to create a demo GIF from your trained model:
+
+```bash
+# Play 10 episodes and create GIF from the longest run
+python create_demo_gif.py --episodes 10 --output demo.gif --fps 10
+
+# Customize options
+python create_demo_gif.py --episodes 20 --output my_demo.gif --fps 15
+```
+
+**How it works:**
+1. Loads your trained model (epsilon=0, pure exploitation)
+2. Plays N episodes and records every frame
+3. Identifies the longest survival episode
+4. Creates an optimized GIF from that episode
+5. Outputs episode statistics and GIF file
+
+**GIF Options:**
+- `--episodes`: Number of episodes to evaluate (default: 10)
+- `--output`: Output filename (default: demo.gif)
+- `--fps`: Frames per second in GIF (default: 10)
+
 ## Training Pipeline
 
 ### Automated Training Loop
-1. **Offline Training Phase**: Train on replay buffer until MSE < target (max 5,000 steps)
+1. **Offline Training Phase**: Train on replay buffer until MSE < target (max 2,000 steps)
 2. **Online Collection Phase**: Play game for 40 episodes, collect experiences
 3. **Repeat**: Cycle continues until Ctrl+C
 
 ### Reward Structure
-- **Alive**: +5.0 for all actions (nothing, jump, duck)
+- **Alive**: +10.0 for all actions (nothing, jump, duck)
 - **Crash**: Last 8 frames ALL get -10.0 penalty
 - **Philosophy**: Entire sequence contributes to crash, not single actions
 
@@ -168,6 +200,7 @@ Input: (4, 84, 252) - 4 stacked binary frames
 - [x] Equal penalty reward structure
 - [x] Action persistence system
 - [x] Hot-reloadable hyperparameters
+- [x] Demo GIF generation tool
 - [ ] Multi-environment generalization
 - [ ] Model compression for deployment
 - [ ] Web-based training dashboard
@@ -183,6 +216,7 @@ Input: (4, 84, 252) - 4 stacked binary frames
 - **PyAutoGUI** - Game control
 - **NumPy** - Numerical operations
 - **Matplotlib** - Visualization
+- **Pillow** - GIF creation
 
 ## Project Structure
 
@@ -191,6 +225,7 @@ dino-game/
 ├── automated_training_loop.py  # Main entry point
 ├── offline_trainer.py          # Train from replay buffer
 ├── online_collector.py         # Collect gameplay experiences
+├── create_demo_gif.py          # Generate demo GIF from trained model
 ├── agent.py                    # DDQN agent implementation
 ├── model.py                    # ResNet DQN architecture
 ├── replay_buffer.py            # Experience replay (FIFO)
