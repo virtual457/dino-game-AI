@@ -206,7 +206,7 @@ def main():
     
     parser.add_argument('--target-mse', type=float, default=0.4,
                        help='Target MSE for offline training')
-    parser.add_argument('--max-train-steps', type=int, default=5000,
+    parser.add_argument('--max-train-steps', type=int, default=2000,
                        help='Maximum training steps per cycle')
     parser.add_argument('--episodes', type=int, default=40,
                        help='Episodes to collect per cycle')
