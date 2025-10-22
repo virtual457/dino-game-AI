@@ -164,9 +164,7 @@ class AutomatedTrainingLoop:
         print(f"  3. Repeat indefinitely")
         print(f"\nPress Ctrl+C anytime to stop gracefully")
         print("="*80 + "\n")
-        
-        input("Press ENTER to start automated training loop...")
-        
+                
         try:
             while not self.should_exit:
                 success = self.run_cycle()

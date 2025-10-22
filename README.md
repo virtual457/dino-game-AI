@@ -285,6 +285,7 @@ Project Link: https://github.com/virtual457/dino-game
 - PyTorch Team
 - Deep Reinforcement Learning community
 - OpenAI Gym documentation
+- Portfolio projects: face recognition, PUBG data analysis, Calendly integration, maritime-logistics, and Orion-paas
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
